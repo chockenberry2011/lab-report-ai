@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Integration Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .header {
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .feature {
+      background: #f8fafc;
+      padding: 15px;
+      border-radius: 6px;
+      border-left: 4px solid #3b82f6;
+    }
+    .feature h3 {
+      margin: 0 0 10px 0;
+      color: #1e293b;
+    }
+    .feature p {
+      margin: 0;
+      color: #64748b;
+      font-size: 14px;
+    }
+    .status {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .status.completed {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .status.in-progress {
+      background: #fef3c7;
+      color: #92400e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Side-by-Side PDF Viewer Integration</h1>
+      <p>Medical lab AI system enhancement for EHR environments</p>
+    </div>
+
+    <h2>Implementation Status</h2>
+
+    <div class="feature-list">
+      <div class="feature">
+        <h3>Backend PDF API <span class="status completed">✓ Completed</span></h3>
+        <p>Added <code>/files/{jobId}/original-pdf</code> endpoint to serve PDFs from /data/inbox/</p>
+      </div>
+
+      <div class="feature">
+        <h3>React PDF Integration <span class="status completed">✓ Completed</span></h3>
+        <p>Installed react-pdf and pdfjs-dist libraries with proper Vite configuration</p>
+      </div>
+
+      <div class="feature">
+        <h3>PDF Viewer Component <span class="status completed">✓ Completed</span></h3>
+        <p>Professional PDF viewer with zoom, navigation, rotation, and download controls</p>
+      </div>
+
+      <div class="feature">
+        <h3>Side-by-Side Layout <span class="status completed">✓ Completed</span></h3>
+        <p>Responsive layout with PDF (60%) and form (40%), resizable panels, keyboard shortcuts</p>
+      </div>
+
+      <div class="feature">
+        <h3>Confidence-Based Highlighting <span class="status completed">✓ Completed</span></h3>
+        <p>Color-coded field overlays: Red <50%, Yellow 50-70%, Green >70% confidence</p>
+      </div>
+
+      <div class="feature">
+        <h3>Field Synchronization <span class="status completed">✓ Completed</span></h3>
+        <p>Click form field → highlight PDF region, click PDF field → focus form field</p>
+      </div>
+    </div>
+
+    <h2>Key Features</h2>
+
+    <div class="feature-list">
+      <div class="feature">
+        <h3>Medical Workflow Optimized</h3>
+        <p>
+          • Desktop/iPad compatible interface<br>
+          • Professional medical review workflow<br>
+          • High contrast confidence indicators<br>
+          • Keyboard shortcuts for efficiency
+        </p>
+      </div>
+
+      <div class="feature">
+        <h3>PDF Viewer Controls</h3>
+        <p>
+          • Zoom levels: 50% to 300%<br>
+          • Page navigation with thumbnails<br>
+          • 90° rotation capability<br>
+          • Direct PDF download
+        </p>
+      </div>
+
+      <div class="feature">
+        <h3>Responsive Layout</h3>
+        <p>
+          • Drag-to-resize panels<br>
+          • Collapsible panels (Cmd+[ / Cmd+])<br>
+          • Mobile-responsive design<br>
+          • Persistent user preferences
+        </p>
+      </div>
+
+      <div class="feature">
+        <h3>Field Mapping</h3>
+        <p>
+          • Automatic test row → PDF location mapping<br>
+          • Confidence-based priority highlighting<br>
+          • Real-time field synchronization<br>
+          • Visual feedback for low confidence fields
+        </p>
+      </div>
+    </div>
+
+    <h2>Technical Implementation</h2>
+
+    <h3>Backend Changes:</h3>
+    <ul>
+      <li>Added PDF serving endpoint in <code>services/api/api/main.py</code></li>
+      <li>Supports multiple PDF location fallbacks (inbox, data directories)</li>
+      <li>Proper CORS and content-type headers for PDF streaming</li>
+    </ul>
+
+    <h3>Frontend Changes:</h3>
+    <ul>
+      <li>New <code>PdfViewer</code> component with full PDF.js integration</li>
+      <li>New <code>SideBySideLayout</code> component for responsive medical workflows</li>
+      <li>New <code>usePdfFieldHighlights</code> hook for field mapping</li>
+      <li>Enhanced <code>ReviewEditorCore</code> with toggle between layouts</li>
+      <li>Updated Vite configuration for PDF.js worker support</li>
+    </ul>
+
+    <h3>File Locations:</h3>
+    <ul>
+      <li><code>/ui/src/components/review/PdfViewer.tsx</code> - Main PDF viewer</li>
+      <li><code>/ui/src/components/review/SideBySideLayout.tsx</code> - Layout manager</li>
+      <li><code>/ui/src/hooks/usePdfFieldHighlights.ts</code> - Field mapping logic</li>
+      <li><code>/ui/src/services/api.ts</code> - PDF API integration</li>
+      <li><code>/ui/src/types/index.ts</code> - TypeScript definitions</li>
+    </ul>
+
+    <h2>Usage</h2>
+    <p>
+      The PDF viewer is now integrated into the ReviewEditorPage. Users can:
+    </p>
+    <ol>
+      <li>Toggle PDF viewer on/off with the "Show/Hide PDF" button</li>
+      <li>View original lab reports side-by-side with the review form</li>
+      <li>See confidence-based highlighting of extracted fields</li>
+      <li>Click between form and PDF to synchronize field focus</li>
+      <li>Use keyboard shortcuts (Cmd+[ / Cmd+]) to hide/show panels</li>
+      <li>Resize panels by dragging the divider</li>
+    </ol>
+
+    <h2>Next Steps</h2>
+    <p>
+      To test the implementation:
+    </p>
+    <ol>
+      <li>Restart the backend API server to load the new PDF endpoint</li>
+      <li>Navigate to any review page with a valid job ID</li>
+      <li>Enable the "Side-by-side PDF viewer" checkbox</li>
+      <li>Verify the PDF loads and field highlighting works</li>
+      <li>Test field synchronization between form and PDF</li>
+    </ol>
+  </div>
+</body>
+</html>

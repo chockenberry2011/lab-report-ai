@@ -1,0 +1,9 @@
+{
+  "name": "lab-ai-root",
+  "private": true,
+  "volta": {
+    "node": "20.15.0",
+    "npm": "10.8.2"
+  }
+}
+

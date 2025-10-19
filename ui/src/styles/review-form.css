@@ -1,0 +1,81 @@
+/* Review Form Styles */
+
+/* Status badges */
+.status-badge {
+  @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+}
+
+.status-badge--extracted {
+  @apply bg-blue-100 text-blue-800;
+}
+
+.status-badge--corrected {
+  @apply bg-green-100 text-green-800;
+}
+
+.status-badge--confidence {
+  @apply bg-gray-100 text-gray-700;
+}
+
+/* Field states */
+.field-row {
+  @apply transition-colors duration-200;
+}
+
+.field-row--dirty {
+  @apply bg-yellow-50 border-l-4 border-yellow-400 pl-3;
+}
+
+.field-row--error {
+  @apply bg-red-50 border-l-4 border-red-400 pl-3;
+}
+
+.field-row--success {
+  @apply bg-green-50 border-l-4 border-green-400 pl-3;
+}
+
+/* Hover states */
+.field-actions {
+  @apply transition-opacity duration-200;
+}
+
+.field-row:hover .field-actions {
+  @apply opacity-100;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .field-row {
+    @apply flex-col space-y-2;
+  }
+  
+  .field-label {
+    @apply w-full;
+  }
+  
+  .field-value {
+    @apply w-full;
+  }
+}
+
+/* Focus states */
+.inline-editor input:focus,
+.inline-editor select:focus {
+  @apply ring-2 ring-blue-500 border-transparent;
+}
+
+/* Original text tooltip */
+.original-tooltip {
+  @apply absolute z-50 p-3 bg-gray-900 text-white text-xs rounded-md shadow-lg max-w-sm;
+  @apply transform -translate-x-1/2 left-1/2;
+}
+
+/* Loading states */
+.field-loading {
+  @apply animate-pulse bg-gray-200 rounded;
+}
+
+/* Dirty change indicator */
+.dirty-indicator {
+  @apply absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full;
+}

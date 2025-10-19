@@ -1,0 +1,33 @@
+# Airflow orchestrator dependencies
+# These will be installed in the Airflow containers
+
+# Core Airflow packages (installed in base image)
+# apache-airflow==2.8.1
+
+# Additional packages needed for Lab AI pipeline
+requests>=2.25.0
+pandas>=1.3.0
+numpy>=1.20.0
+
+# For API communication
+httpx>=0.24.0
+aiohttp>=3.8.0
+
+# For file processing
+pathlib2>=2.3.0
+
+# For JSON/data handling
+jsonlines>=3.0.0
+pydantic>=1.8.0
+
+# For model evaluation (if running evals in Airflow)
+scikit-learn>=1.0.0
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# For database connections
+psycopg2-binary>=2.9.0
+redis>=4.0.0
+
+# For email notifications (optional)
+email-validator>=1.1.0
