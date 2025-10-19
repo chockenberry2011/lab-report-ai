@@ -172,9 +172,9 @@ services:
     environment:
       - LABEL_STUDIO_LOCAL_FILES_SERVING_ENABLED=true
       - LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=/data
-      - LABEL_STUDIO_USER_TOKEN=your-token-here
-      - LABEL_STUDIO_USERNAME=admin
-      - LABEL_STUDIO_PASSWORD=admin
+      - LABEL_STUDIO_USER_TOKEN=${LABEL_STUDIO_USER_TOKEN:-your-token-here}
+      - LABEL_STUDIO_USERNAME=${LABEL_STUDIO_USERNAME:-admin}
+      - LABEL_STUDIO_PASSWORD=${LABEL_STUDIO_PASSWORD:-changeme}
     volumes:
       - ./data:/data
       - ./data/labelstudio:/label-studio/data
@@ -184,9 +184,9 @@ services:
     image: postgres:15-alpine
     platform: linux/arm64
     environment:
-      - POSTGRES_USER=airflow
-      - POSTGRES_PASSWORD=airflow
-      - POSTGRES_DB=airflow
+      - POSTGRES_USER=${POSTGRES_USER:-airflow}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
+      - POSTGRES_DB=${POSTGRES_DB:-airflow}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
@@ -201,14 +201,14 @@ services:
     # image: apache/airflow:2.8.1
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@airflow-postgres:5432/airflow
-      - AIRFLOW__CORE__FERNET_KEY=your-32-character-fernet-key-here
-      - AIRFLOW__WEBSERVER__SECRET_KEY=your-secret-key-here
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${POSTGRES_USER:-airflow}:${POSTGRES_PASSWORD:-changeme}@airflow-postgres:5432/${POSTGRES_DB:-airflow}
+      - AIRFLOW__CORE__FERNET_KEY=${AIRFLOW__CORE__FERNET_KEY:-your-32-character-fernet-key-here}
+      - AIRFLOW__WEBSERVER__SECRET_KEY=${AIRFLOW__WEBSERVER__SECRET_KEY:-your-secret-key-here}
       - AIRFLOW__CORE__LOAD_EXAMPLES=false
       - AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION=true
       - _AIRFLOW_WWW_USER_CREATE=true
-      - _AIRFLOW_WWW_USER_USERNAME=admin
-      - _AIRFLOW_WWW_USER_PASSWORD=admin
+      - _AIRFLOW_WWW_USER_USERNAME=${_AIRFLOW_WWW_USER_USERNAME:-admin}
+      - _AIRFLOW_WWW_USER_PASSWORD=${_AIRFLOW_WWW_USER_PASSWORD:-changeme}
     volumes:
       - ./orchestrator:/opt/airflow/orchestrator
       - ./scripts:/scripts
@@ -217,7 +217,7 @@ services:
     command: |
       bash -c "
         airflow db init &&
-        airflow users create --role Admin --username admin --email admin@lab-ai.com --firstname Admin --lastname User --password admin --skip-if-exists
+        airflow users create --role Admin --username ${_AIRFLOW_WWW_USER_USERNAME:-admin} --email ${_AIRFLOW_WWW_USER_EMAIL:-user@example.com} --firstname Admin --lastname User --password ${_AIRFLOW_WWW_USER_PASSWORD:-changeme} --skip-if-exists
       "
     profiles:
       - airflow
@@ -232,9 +232,9 @@ services:
       - "8081:8080"
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@airflow-postgres:5432/airflow
-      - AIRFLOW__CORE__FERNET_KEY=your-32-character-fernet-key-here
-      - AIRFLOW__WEBSERVER__SECRET_KEY=your-secret-key-here
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${POSTGRES_USER:-airflow}:${POSTGRES_PASSWORD:-changeme}@airflow-postgres:5432/${POSTGRES_DB:-airflow}
+      - AIRFLOW__CORE__FERNET_KEY=${AIRFLOW__CORE__FERNET_KEY:-your-32-character-fernet-key-here}
+      - AIRFLOW__WEBSERVER__SECRET_KEY=${AIRFLOW__WEBSERVER__SECRET_KEY:-your-secret-key-here}
       - AIRFLOW__CORE__LOAD_EXAMPLES=false
       - AIRFLOW__WEBSERVER__EXPOSE_CONFIG=true
       - API_URL=http://api:8000
@@ -270,9 +270,9 @@ services:
     platform: linux/arm64
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@airflow-postgres:5432/airflow
-      - AIRFLOW__CORE__FERNET_KEY=your-32-character-fernet-key-here
-      - AIRFLOW__WEBSERVER__SECRET_KEY=your-secret-key-here
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${POSTGRES_USER:-airflow}:${POSTGRES_PASSWORD:-changeme}@airflow-postgres:5432/${POSTGRES_DB:-airflow}
+      - AIRFLOW__CORE__FERNET_KEY=${AIRFLOW__CORE__FERNET_KEY:-your-32-character-fernet-key-here}
+      - AIRFLOW__WEBSERVER__SECRET_KEY=${AIRFLOW__WEBSERVER__SECRET_KEY:-your-secret-key-here}
       - AIRFLOW__CORE__LOAD_EXAMPLES=false
       - API_URL=http://api:8000
       - DATA_DIR=/data

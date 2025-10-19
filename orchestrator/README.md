@@ -270,7 +270,7 @@ Set in Airflow UI (Admin → Variables):
     "enabled": false,
     "smtp_host": "localhost",
     "smtp_port": 587,
-    "recipients": ["admin@lab-ai.com"]
+    "recipients": ["user@example.com"]
   },
   "training_config": {
     "roles_epochs": 10,

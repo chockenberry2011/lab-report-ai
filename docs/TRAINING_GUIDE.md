@@ -89,7 +89,7 @@ _Start from absolutely nothing and build a complete training pipeline using enha
 
 ```bash
 # 1. Navigate to project directory
-cd /Users/charliehockenberry/source/lab-ai
+cd ~/lab-report-ai
 
 # 2. Start all services (fresh start)
 make down || true
@@ -1228,7 +1228,7 @@ docker compose exec trainer ls -la /data/inbox/
 
 # Check you're in the right directory
 pwd
-# Should show: /Users/charliehockenberry/source/lab-ai
+# Should show: ~/lab-report-ai (or your installation path)
 ```
 
 ### **Comprehensive Category Issues:**
