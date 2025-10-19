@@ -522,7 +522,7 @@ make up
 # Stop services
 make down
 
-# View logs
+# View logs (all services)
 make logs
 
 # Check status
@@ -531,9 +531,41 @@ make status
 # Rebuild after code changes
 make rebuild
 
-# Clean everything (including volumes)
+# Fresh deployment (stop, rebuild, start)
+make fresh
+
+# Clean everything (including volumes - nuclear option)
 make clean
 ```
+
+### Quick Reference: Key Make Commands
+
+| Command | Description |
+|---------|-------------|
+| `make dev-setup` | Initial setup (creates dirs, builds, starts) |
+| `make up` | Start all core services |
+| `make down` | Stop all services |
+| `make status` | Check service status |
+| `make logs` | View logs from all services |
+| `make build` | Build all Docker images |
+| `make rebuild` | Rebuild from scratch (no cache) |
+| `make fresh` | **Stop → Rebuild → Start** (fresh deployment) |
+| `make clean` | Stop services and remove volumes |
+| `make shell-api` | Open shell in API container |
+| `make shell-worker` | Open shell in worker container |
+| `make shell-trainer` | Open shell in trainer container |
+| `make extract-lines` | Extract lines from PDF |
+| `make roles.train` | Train line role classifier |
+| `make roles.eval` | Evaluate line classifier |
+| `make testrow.train` | Train test row NER model |
+| `make testrow.eval` | Evaluate test row NER model |
+
+### When to Use Which Command
+
+- **`make fresh`** - Use when you've made Docker/config changes and want a clean restart
+- **`make rebuild`** - Use when you've changed Dockerfiles or dependencies
+- **`make up`** - Use for normal startup after `make down`
+- **`make clean`** - Use when things are really broken (removes all data volumes!)
 
 ### Service-Specific Commands
 
@@ -542,12 +574,20 @@ make clean
 make shell-api
 make shell-worker
 make shell-trainer
+make shell-extractor
 
 # Restart specific service
 docker compose restart worker
+make api-restart  # Rebuild + restart API
 
 # View service logs
 docker compose logs -f worker
+docker compose logs -f api
+docker compose logs -f ui
+
+# Build specific service
+docker compose build worker
+docker compose build ui
 ```
 
 ### Development Workflow
@@ -579,6 +619,111 @@ docker compose exec worker pytest tests/
 
 # UI tests (from ui directory)
 cd ui && npm test
+
+# Extractor tests
+make test-extractor
+
+# Trainer self-test
+make trainer-selftest
+```
+
+### All Available Make Commands
+
+<details>
+<summary>Click to expand complete command reference</summary>
+
+#### Core Operations
+- `make help` - Show all available commands
+- `make dev-setup` - Initial setup (one-time)
+- `make up` - Start all services
+- `make down` - Stop all services
+- `make status` - Check service status
+- `make logs` - View all service logs
+- `make build` - Build all Docker images
+- `make rebuild` - Rebuild from scratch (no cache)
+- `make fresh` - Stop, rebuild, and start (fresh deployment)
+- `make clean` - Stop and remove volumes (⚠️ deletes data!)
+
+#### Service Management
+- `make shell-api` - Open shell in API container
+- `make shell-worker` - Open shell in worker container
+- `make shell-extractor` - Open shell in extractor container
+- `make shell-trainer` - Open shell in trainer container
+- `make api-restart` - Rebuild and restart API
+- `make worker-restart` - Restart worker
+
+#### Airflow (Optional)
+- `make up-airflow` - Start with Airflow
+- `make down-airflow` - Stop Airflow services
+
+#### PDF Processing
+- `make extract-text PDF=/data/file.pdf` - Extract text from PDF
+- `make extract-lines PDF=/data/file.pdf` - Extract lines with metadata
+- `make reprocess.one FILE=basename` - Reprocess a single PDF
+
+#### Model Training - Line Roles
+- `make roles.train` - Train line role classifier
+- `make roles.eval` - Evaluate line classifier
+- `make sample-roles-data` - Generate sample training data
+- `make classify-roles INPUT=/data/file.lines.json` - Apply classifier
+- `make roles-sanity FILE=/data/file.lines.json` - Sanity check output
+
+#### Model Training - Test Rows
+- `make testrow.train` - Train test row NER model
+- `make testrow.eval` - Evaluate test row NER model
+- `make sample-testrow-data` - Generate sample test row data
+- `make parse-testrow TEXT="..."` - Parse test row into tokens
+
+#### Corrections & Data
+- `make corrections.triage ID=<result_id>` - Triage corrections file
+- `make corrections.normalize` - Normalize corrections
+- `make corrections.apply` - Apply corrections to canonical docs
+
+#### Testing & Debugging
+- `make test-extractor` - Run extractor unit tests
+- `make test-headers` - Run header extractor tests
+- `make trainer-selftest` - Test trainer module imports
+- `make demo-extractor` - Run extractor demo
+- `make demo-headers` - Run header extraction demo
+- `make debug-report` - View last processed job artifacts
+- `make check-imports` - Audit import paths
+
+#### UI Specific
+- `make ui-check-lock` - Verify npm lockfile integrity
+- `make ui-check-scripts` - Verify package.json scripts
+- `make up-ui-verbose` - Start UI with verbose output
+
+</details>
+
+### Common Workflows
+
+**First time setup:**
+```bash
+make dev-setup
+```
+
+**Normal development:**
+```bash
+make up          # Start
+# ... work ...
+make down        # Stop when done
+```
+
+**After changing code:**
+```bash
+make fresh       # Clean restart
+```
+
+**After changing dependencies:**
+```bash
+make rebuild     # Rebuild with new deps
+make up
+```
+
+**Something broken?**
+```bash
+make clean       # Nuclear option - removes everything
+make dev-setup   # Start fresh
 ```
 
 ### Debugging

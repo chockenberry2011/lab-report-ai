@@ -1,0 +1,100 @@
+{
+  "default": {
+    "description": "Default configuration with standard settings",
+    "extraction": {
+      "dpi": 150,
+      "extract_images": false
+    },
+    "roles": {
+      "model_path": "models/role_classifier.joblib"
+    },
+    "headers": {},
+    "testrows": {
+      "model_path": "models/testrow_classifier.joblib"
+    },
+    "composition": {
+      "composer": {
+        "page_break_lookahead": 5,
+        "min_continuity_score": 0.3,
+        "cost_weight_switches": 2.0,
+        "cost_weight_coherence": 1.0
+      },
+      "scoring": {
+        "value_parse_threshold": 0.7,
+        "unit_validity_threshold": 0.8,
+        "ref_range_threshold": 0.6,
+        "panel_score_threshold": 0.7,
+        "document_score_threshold": 0.75
+      }
+    }
+  },
+  
+  "high_quality": {
+    "description": "High quality processing with strict thresholds",
+    "extraction": {
+      "dpi": 200,
+      "extract_images": true
+    },
+    "composition": {
+      "composer": {
+        "page_break_lookahead": 8,
+        "min_continuity_score": 0.5,
+        "cost_weight_switches": 3.0,
+        "cost_weight_coherence": 1.5
+      },
+      "scoring": {
+        "value_parse_threshold": 0.9,
+        "unit_validity_threshold": 0.9,
+        "ref_range_threshold": 0.8,
+        "panel_score_threshold": 0.8,
+        "document_score_threshold": 0.85
+      }
+    }
+  },
+  
+  "fast_processing": {
+    "description": "Fast processing with lenient thresholds",
+    "extraction": {
+      "dpi": 120,
+      "extract_images": false
+    },
+    "composition": {
+      "composer": {
+        "page_break_lookahead": 3,
+        "min_continuity_score": 0.2,
+        "cost_weight_switches": 1.5,
+        "cost_weight_coherence": 0.8
+      },
+      "scoring": {
+        "value_parse_threshold": 0.5,
+        "unit_validity_threshold": 0.6,
+        "ref_range_threshold": 0.4,
+        "panel_score_threshold": 0.5,
+        "document_score_threshold": 0.6
+      }
+    }
+  },
+  
+  "research_mode": {
+    "description": "Research mode with detailed analysis and low thresholds",
+    "extraction": {
+      "dpi": 300,
+      "extract_images": true
+    },
+    "composition": {
+      "composer": {
+        "page_break_lookahead": 10,
+        "min_continuity_score": 0.1,
+        "cost_weight_switches": 1.0,
+        "cost_weight_coherence": 2.0
+      },
+      "scoring": {
+        "value_parse_threshold": 0.3,
+        "unit_validity_threshold": 0.4,
+        "ref_range_threshold": 0.2,
+        "panel_score_threshold": 0.3,
+        "document_score_threshold": 0.4
+      }
+    }
+  }
+}
