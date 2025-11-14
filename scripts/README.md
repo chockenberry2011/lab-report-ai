@@ -111,8 +111,8 @@ labelstudio:
   ports:
     - "8080:8080"
   environment:
-    - LABEL_STUDIO_USERNAME=admin
-    - LABEL_STUDIO_PASSWORD=admin
+    - LABEL_STUDIO_USERNAME=admin@localhost
+    - LABEL_STUDIO_PASSWORD=changeme
   volumes:
     - ./data:/data
     - ./data/labelstudio:/label-studio/data
@@ -128,7 +128,7 @@ docker-compose up labelstudio
 docker-compose up
 ```
 
-Access at: http://localhost:8080 (admin/admin)
+Access at: http://localhost:8080 (admin@localhost/changeme)
 
 ### Data Directory Structure
 

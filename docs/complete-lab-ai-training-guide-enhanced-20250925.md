@@ -104,7 +104,7 @@ make status
 # 4. Test access
 # Browser: http://localhost:3000 (should load UI)
 # Browser: http://localhost:8080 (should load Label Studio)
-# Login: admin/admin
+# Login: admin@localhost/changeme
 
 # 5. Check your actual PDF files
 docker compose exec trainer ls -la /data/inbox/*.pdf
@@ -200,7 +200,7 @@ docker compose exec trainer wc -l /data/labelstudio/imports/all_lines_for_labeli
 
 **Go to Label Studio (http://localhost:8080):**
 
-1. **Login**: admin/admin
+1. **Login**: admin@localhost/changeme
 2. **Click "Create Project"**
 3. **Project Name**: `Comprehensive Line Role Classification - Phase 0`
 4. **Description**: `15-category comprehensive line role classification including medical director and fasting requirements`

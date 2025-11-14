@@ -235,7 +235,7 @@ This is a proof-of-concept with significant limitations:
 ### Security
 - ❌ No authentication or authorization
 - ❌ No input validation/sanitization in many places
-- ❌ Default passwords in docker-compose (admin/admin)
+- ❌ Default passwords in docker-compose (admin@localhost/changeme)
 - ❌ No rate limiting
 - ❌ No HTTPS/TLS
 
@@ -471,7 +471,7 @@ docker compose cp trainer:/data/labelstudio/imports/all_lines.json ./
 
 #### Step 4: Label in Label Studio
 
-1. Navigate to http://localhost:8080 (login: admin/admin)
+1. Navigate to http://localhost:8080 (login: admin@localhost/changeme)
 2. Create project: "Line Role Classification - Phase 0"
 3. Configure labeling interface (see [docs/TRAINING_GUIDE.md](docs/TRAINING_GUIDE.md))
 4. Import `all_lines.json`

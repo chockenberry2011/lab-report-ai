@@ -218,12 +218,12 @@ make status
 **Expected services:**
 - API: http://localhost:8000
 - UI: http://localhost:3000
-- Label Studio: http://localhost:8080 (admin/admin)
+- Label Studio: http://localhost:8080 (admin@localhost/changeme)
 - Redis: localhost:6379
 
 ### Step 1: Set up Label Studio projects
 
-1. Go to http://localhost:8080, login with admin/admin
+1. Go to http://localhost:8080, login with admin@localhost/changeme
 2. Create three projects using the XML configs above
 3. Import your de-identified PDF text data
 

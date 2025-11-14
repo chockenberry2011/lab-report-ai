@@ -85,7 +85,7 @@ make status
 **Test the services:**
 - API: http://localhost:8000/health (should show "OK")
 - UI: http://localhost:3000 (should load the web interface)
-- Label Studio: http://localhost:8080 (login: admin/admin)
+- Label Studio: http://localhost:8080 (login: admin@localhost/changeme)
 
 ---
 
@@ -642,7 +642,7 @@ make debug-report                     # Quick diagnostics
 ### Service URLs
 - **UI**: http://localhost:3000
 - **API**: http://localhost:8000
-- **Label Studio**: http://localhost:8080 (admin/admin)
+- **Label Studio**: http://localhost:8080 (admin@localhost/changeme)
 
 ---
 

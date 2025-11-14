@@ -146,7 +146,7 @@ Lab AI is a microservices-based ML platform designed to automatically extract, s
 - Export annotations for model training
 
 **Port**: 8080
-**Credentials**: admin/admin (development)
+**Credentials**: admin@localhost/changeme (development)
 
 ---
 
@@ -337,7 +337,7 @@ Lab AI is a microservices-based ML platform designed to automatically extract, s
 
 ### Current Status (Development)
 - No authentication
-- Default passwords (admin/admin)
+- Default passwords (admin@localhost/changeme)
 - No encryption at rest
 - No audit logging
 
